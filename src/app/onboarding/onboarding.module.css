@@ -1,0 +1,373 @@
+.container {
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto;
+  padding: 15px;
+}
+
+/* Base Variables - mapped to CSS variables in scope or just used directly */
+.clayBg {
+  background-color: #f8fafc;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: -apple-system, "PingFang SC", sans-serif;
+  color: #374151;
+}
+
+/* Animations */
+.stepEnter {
+  animation: slideUp 0.4s ease-out;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Titles */
+.sectionTitle {
+  text-align: center;
+  font-size: 1.3rem;
+  margin-bottom: 20px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.titleXl {
+  font-size: 1.7rem;
+  text-align: center;
+  margin-bottom: 5px;
+  font-weight: 900;
+  color: #1f2937;
+}
+
+.tipWarn {
+  text-align: center;
+  color: #ff5e57;
+  font-size: 0.95rem;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.guideSubtitle {
+  text-align: center;
+  color: #a29bfe;
+  font-weight: 800;
+  margin: -10px 0 15px;
+}
+
+.guideBody {
+  white-space: pre-line;
+  text-align: center;
+  color: #64748b;
+  font-size: 0.92rem;
+  font-weight: 700;
+  line-height: 1.6;
+  margin: 8px 0 12px;
+}
+
+.guideImageWrap {
+  width: 100%;
+  border-radius: 24px;
+  background: #fff;
+  box-shadow: 8px 8px 18px #e5eaf0, -6px -6px 14px #ffffff;
+  overflow: hidden;
+  margin: 12px 0;
+  padding: 10px;
+}
+
+.guideImage {
+  width: 100%;
+  height: auto;
+  max-height: 220px;
+  object-fit: contain;
+  border-radius: 18px;
+}
+
+.sopTip {
+  background: #eef2ff;
+  border: 1px solid #dbe4ff;
+  color: #6366f1;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  font-weight: 800;
+  border-radius: 16px;
+  padding: 10px 12px;
+  margin: 8px 0 14px;
+  text-align: center;
+  white-space: pre-line;
+}
+
+/* Clay Cards */
+.clayCard {
+  background: #ffffff;
+  border-radius: 26px;
+  padding: 20px;
+  margin-bottom: 12px;
+  box-shadow: 12px 12px 24px #e5eaf0, -10px -10px 20px #ffffff;
+}
+
+.clayBtn {
+  text-align: center;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 18px;
+  font-size: 1.1rem;
+  transition: all 0.2s;
+}
+
+.clayBtn:active {
+  transform: scale(0.97);
+  box-shadow: inset 5px 5px 12px #e5eaf0, inset -5px -5px 12px #ffffff;
+}
+
+/* Rewards */
+.rewardItem {
+  border-radius: 22px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 6px 6px 15px #e5eaf0, -4px -4px 10px #ffffff;
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+.priceTag {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  font-size: 1.2rem;
+  font-style: italic;
+  color: #ff5e57;
+}
+
+/* Inputs */
+.clayInput {
+  width: 100%;
+  border: none;
+  background: #fff;
+  padding: 16px;
+  border-radius: 18px;
+  box-shadow: inset 4px 4px 10px #e5eaf0, inset -4px -4px 10px #ffffff;
+  font-size: 1rem;
+  color: #a29bfe;
+  margin-bottom: 5px;
+  outline: none;
+}
+
+/* Platform Grid */
+.gridLayout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.platformCard {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 12px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.platformSelected {
+  box-shadow: inset 5px 5px 10px #e5eaf0, inset -5px -5px 10px #ffffff;
+  color: #a29bfe;
+}
+
+.checkUi {
+  opacity: 0;
+  transition: 0.2s;
+}
+
+.platformSelected .checkUi {
+  opacity: 1;
+}
+
+.platformRemind {
+  text-align: center;
+  color: #ff5e57;
+  font-weight: 900;
+  font-size: 1.1rem;
+  margin-top: 15px;
+  padding: 10px;
+  border: 2px dashed #ff5e57;
+  border-radius: 15px;
+  background: #fff5f5;
+}
+
+/* Step 3: Accounts */
+.platformHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.addBtn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #a29bfe;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  cursor: pointer;
+  border: none;
+  box-shadow: 2px 2px 5px #e5eaf0;
+}
+
+.statusRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.statusBtn {
+  background: #fff;
+  padding: 10px;
+  border-radius: 12px;
+  border: none;
+  font-size: 0.85rem;
+  font-weight: bold;
+  color: #94a3b8;
+  box-shadow: 4px 4px 8px #e5eaf0, -2px -2px 5px #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: 0.2s;
+  cursor: pointer;
+}
+
+.statusBtnSelected {
+  box-shadow: inset 4px 4px 8px #e5eaf0;
+  color: #a29bfe;
+  background: #f0f7ff;
+}
+
+.statusCheck {
+  opacity: 0;
+  transition: 0.2s;
+}
+
+.statusBtnSelected .statusCheck {
+  opacity: 1;
+}
+
+.errorHint {
+  color: #ef4444;
+  font-size: 0.75rem;
+  margin-top: 5px;
+  display: none;
+  font-weight: bold;
+}
+
+/* Primary Button */
+.primaryBtn {
+  width: 100%;
+  background: #a29bfe;
+  color: white;
+  padding: 18px;
+  border-radius: 50px;
+  border: none;
+  font-size: 1.2rem;
+  font-weight: 900;
+  cursor: pointer;
+  box-shadow: 0 10px 20px rgba(162, 155, 254, 0.3);
+  margin-top: 15px;
+}
+
+/* Result Page */
+.accCard {
+  background: #fff;
+  padding: 25px 20px;
+  border-radius: 26px;
+  box-shadow: 10px 10px 20px #e5eaf0;
+  margin-bottom: 12px;
+  position: relative;
+}
+
+.accRow {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  gap: 8px;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.accLabel {
+  font-size: 1.1rem;
+  color: #94a3b8;
+  font-weight: 900;
+}
+
+.accNumber {
+  font-size: 2.6rem;
+  font-weight: 900;
+  color: #a29bfe;
+  letter-spacing: 2px;
+}
+
+.pwdRow {
+  margin-top: 10px;
+  padding-top: 12px;
+  border-top: 1px dashed #cbd5e1;
+  font-weight: bold;
+  color: #64748b;
+  font-size: 1.1rem;
+  cursor: pointer;
+  text-align: center;
+}
+
+.journeyHeader {
+  background: #a29bfe;
+  color: white;
+  font-size: 1.8rem;
+  font-weight: 900;
+  padding: 10px 40px;
+  border-radius: 50px;
+  margin: 20px 0 15px;
+  display: inline-block;
+  box-shadow: 0 8px 15px rgba(162, 155, 254, 0.4);
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+.journeyStep {
+  background: white;
+  border-radius: 20px;
+  padding: 15px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 4px 4px 10px #e5eaf0;
+  text-align: left;
+}
+
+.stepNum {
+  width: 30px;
+  height: 30px;
+  background: #a29bfe;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  flex-shrink: 0;
+}
