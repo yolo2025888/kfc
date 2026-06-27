@@ -23,21 +23,30 @@ function normalizeText(value: unknown, maxLength: number) {
   return value.trim().slice(0, maxLength);
 }
 
-function generatePassword(length = 12) {
-  // Removed easily confused characters: i, l, 1, o, 0
-  const chars = 'abcdefghjkmnpqrstuvwxyz23456789'; 
-  let pass = '';
+function randomChar(chars: string) {
   const maxRandomValue = 256 - (256 % chars.length);
 
-  while (pass.length < length) {
+  while (true) {
     const random = new Uint8Array(1);
     crypto.getRandomValues(random);
 
     if (random[0] >= maxRandomValue) continue;
-    pass += chars.charAt(random[0] % chars.length);
+    return chars.charAt(random[0] % chars.length);
   }
+}
 
-  return pass;
+function generatePassword() {
+  const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  const digits = '0123456789';
+
+  return [
+    randomChar(letters),
+    randomChar(letters),
+    randomChar(letters),
+    randomChar(digits),
+    randomChar(digits),
+    randomChar(digits),
+  ].join('');
 }
 
 export async function POST(request: Request) {
