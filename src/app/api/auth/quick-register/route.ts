@@ -36,17 +36,14 @@ function randomChar(chars: string) {
 }
 
 function generatePassword() {
-  const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  const letters = 'abcdefghijklmnopqrstuvwxyz';
   const digits = '0123456789';
+  const letterPart = randomChar(letters).repeat(3);
+  const digitPart = randomChar(digits).repeat(3);
 
-  return [
-    randomChar(letters),
-    randomChar(letters),
-    randomChar(letters),
-    randomChar(digits),
-    randomChar(digits),
-    randomChar(digits),
-  ].join('');
+  return randomChar('01') === '0'
+    ? `${letterPart}${digitPart}`
+    : `${digitPart}${letterPart}`;
 }
 
 export async function POST(request: Request) {
