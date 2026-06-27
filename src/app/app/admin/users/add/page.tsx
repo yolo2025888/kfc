@@ -14,7 +14,7 @@ import { useToast } from "@/hooks/use-toast";
 import { Loader2, UserPlus, ArrowLeft, ShieldCheck } from 'lucide-react';
 import { SassClient } from '@/lib/supabase/unified';
 import { Database } from '@/lib/types';
-import { getErrorMessage } from '@/lib/utils';
+import { displayUserAccount, getErrorMessage, toInternalLoginEmail } from '@/lib/utils';
 
 type Role = Database['public']['Tables']['app_roles']['Row'];
 type Platform = Database['public']['Tables']['platforms']['Row'];
@@ -102,8 +102,7 @@ export default function AdminAddUserPage() {
             return;
         }
 
-        // Append @gmail.com automatically
-        const finalEmail = email.includes('@') ? email : `${email}@gmail.com`;
+        const finalEmail = toInternalLoginEmail(email);
 
         setLoading(true);
         NProgress.start();
@@ -118,7 +117,7 @@ export default function AdminAddUserPage() {
                 visible_platforms: visiblePlatforms, // Send array as-is
                 visible_categories: visibleCategories // Send array as-is
             });
-            toast({ title: "用户创建成功", description: `账号: ${finalEmail}` });
+            toast({ title: "用户创建成功", description: `账号: ${displayUserAccount(finalEmail)}` });
             setFormData({
                 email: '',
                 password: '',
@@ -165,9 +164,8 @@ export default function AdminAddUserPage() {
                                         onChange={handleChange} 
                                         placeholder="例如：zhangsan" 
                                         required 
-                                        className="pr-20"
+                                        className="pr-3"
                                     />
-                                    <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm">@gmail.com</span>
                                 </div>
                             </div>
                             <div className="space-y-2">

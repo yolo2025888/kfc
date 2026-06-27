@@ -4,6 +4,7 @@ import { CheckCircle } from 'lucide-react';
 import Link from 'next/link';
 import {useState} from "react";
 import {createSPASassClient} from "@/lib/supabase/client";
+import { toInternalLoginEmail } from '@/lib/utils';
 
 export default function VerifyEmailPage() {
     const [email, setEmail] = useState('');
@@ -13,7 +14,7 @@ export default function VerifyEmailPage() {
 
     const resendVerificationEmail = async () => {
         if (!email) {
-            setError('Please enter your email address');
+            setError('请输入账号');
             return;
         }
 
@@ -21,7 +22,7 @@ export default function VerifyEmailPage() {
             setLoading(true);
             setError('');
             const supabase = await createSPASassClient();
-            const {error} = await supabase.resendVerificationEmail(email);
+            const {error} = await supabase.resendVerificationEmail(toInternalLoginEmail(email));
             if(error) {
                 setError(error.message);
                 return;
@@ -56,7 +57,7 @@ export default function VerifyEmailPage() {
 
                 <div className="space-y-4">
                     <p className="text-sm text-gray-500">
-                        Didn&#39;t receive the email? Check your spam folder or enter your email to resend:
+                        没有收到验证邮件？请检查垃圾邮件，或输入账号重新发送：
                     </p>
 
                     {error && (
@@ -73,10 +74,11 @@ export default function VerifyEmailPage() {
 
                     <div className="mt-4">
                         <input
-                            type="email"
+                            type="text"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
-                            placeholder="Enter your email address"
+                            placeholder="请输入账号"
+                            autoComplete="username"
                             className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-primary-500 focus:outline-none focus:ring-primary-500 text-sm"
                         />
                     </div>

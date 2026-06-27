@@ -4,12 +4,27 @@ import {cookies} from 'next/headers'
 import {ClientType, SassClient} from "@/lib/supabase/unified";
 import {Database} from "@/lib/types";
 
+const missingSupabaseServerConfigMessage =
+    'Missing NEXT_PUBLIC_SUPABASE_URL or NEXT_PUBLIC_SUPABASE_ANON_KEY';
+
+function getSupabasePublicConfig() {
+    const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+    const anon = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+    if (!url || !anon) {
+        throw new Error(missingSupabaseServerConfigMessage);
+    }
+
+    return { url, anon };
+}
+
 export async function createSSRClient() {
     const cookieStore = await cookies()
+    const { url, anon } = getSupabasePublicConfig();
 
     return createServerClient<Database, "public">(
-        process.env.NEXT_PUBLIC_SUPABASE_URL!,
-        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+        url,
+        anon,
         {
             cookies: {
                 getAll() {
@@ -42,11 +57,7 @@ export async function createSSRSassClient() {
 
 // Anonymous, cookie-less server client for read-only access (Edge/RSC friendly)
 export function createServerAnonClient() {
-    const url = process.env.NEXT_PUBLIC_SUPABASE_URL as string;
-    const anon = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY as string;
-    if (!url || !anon) {
-        throw new Error('Missing NEXT_PUBLIC_SUPABASE_URL or NEXT_PUBLIC_SUPABASE_ANON_KEY');
-    }
+    const { url, anon } = getSupabasePublicConfig();
     return createClient<Database>(url, anon, {
         auth: {
             persistSession: false,

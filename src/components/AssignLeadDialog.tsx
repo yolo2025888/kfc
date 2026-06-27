@@ -5,7 +5,7 @@ import { Search, UserCheck, Loader2 } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { SassClient } from '@/lib/supabase/unified';
 import { useToast } from "@/hooks/use-toast";
-import { cn, getErrorMessage } from '@/lib/utils';
+import { cn, displayUserAccount, getErrorMessage } from '@/lib/utils';
 import Image from 'next/image';
 
 interface AssignLeadDialogProps {
@@ -66,7 +66,7 @@ export function AssignLeadDialog({ open, onOpenChange, leadId, client, onSuccess
             const lowerQuery = searchQuery.toLowerCase();
             setFilteredAuditors(auditors.filter(a => 
                 (a.full_name?.toLowerCase().includes(lowerQuery)) || 
-                (a.email?.toLowerCase().includes(lowerQuery))
+                (displayUserAccount(a.email).toLowerCase().includes(lowerQuery))
             ));
         }
     }, [searchQuery, auditors]);
@@ -145,7 +145,7 @@ export function AssignLeadDialog({ open, onOpenChange, leadId, client, onSuccess
                                         </div>
                                         <div className="flex-1 overflow-hidden">
                                             <div className="font-medium text-sm truncate">{auditor.full_name || '未命名'}</div>
-                                            <div className="text-xs text-muted-foreground truncate">{auditor.email}</div>
+                                            <div className="text-xs text-muted-foreground truncate">{displayUserAccount(auditor.email)}</div>
                                         </div>
                                         {selectedAuditorId === auditor.id && (
                                             <UserCheck className="h-5 w-5 text-blue-600" />

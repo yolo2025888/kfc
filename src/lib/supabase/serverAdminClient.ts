@@ -5,15 +5,20 @@ import { Database } from '../types'; // Adjust path if needed
 // Only use on the server side (API routes, server components/actions)
 // and ensure it's protected by appropriate authentication/authorization checks.
 export function createServerAdminClient() {
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const serviceRoleKey =
     process.env.PRIVATE_SUPABASE_SERVICE_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+  if (!supabaseUrl) {
+    throw new Error('Missing NEXT_PUBLIC_SUPABASE_URL');
+  }
 
   if (!serviceRoleKey) {
     throw new Error('Missing PRIVATE_SUPABASE_SERVICE_KEY or SUPABASE_SERVICE_ROLE_KEY');
   }
 
   return createClient<Database>(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    supabaseUrl,
     serviceRoleKey,
     {
       auth: {

@@ -1,11 +1,28 @@
 import { createServerClient } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
 
+function hasSupabaseServerConfig() {
+    return Boolean(
+        process.env.NEXT_PUBLIC_SUPABASE_URL &&
+        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+    );
+}
+
 export async function updateSession(request: NextRequest) {
     const publicPaths = ['/', '/onboarding']
 
     // Public entry points do not need a Supabase session refresh before render.
     if (publicPaths.includes(request.nextUrl.pathname)) {
+        return NextResponse.next();
+    }
+
+    if (!hasSupabaseServerConfig()) {
+        if (request.nextUrl.pathname.startsWith('/app')) {
+            const url = request.nextUrl.clone()
+            url.pathname = '/auth/login'
+            return NextResponse.redirect(url)
+        }
+
         return NextResponse.next();
     }
 

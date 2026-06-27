@@ -2,7 +2,21 @@ import {createBrowserClient} from '@supabase/ssr'
 import {ClientType, SassClient} from "@/lib/supabase/unified";
 import {Database} from "@/lib/types";
 
+export const missingSupabaseConfigMessage =
+    'Missing NEXT_PUBLIC_SUPABASE_URL or NEXT_PUBLIC_SUPABASE_ANON_KEY. Create .env.local from .env.example and fill in your Supabase project values.';
+
+export function hasSupabaseBrowserConfig() {
+    return Boolean(
+        process.env.NEXT_PUBLIC_SUPABASE_URL &&
+        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+    );
+}
+
 export function createSPAClient() {
+    if (!hasSupabaseBrowserConfig()) {
+        throw new Error(missingSupabaseConfigMessage);
+    }
+
     return createBrowserClient<Database, "public">(
         process.env.NEXT_PUBLIC_SUPABASE_URL!,
         process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!

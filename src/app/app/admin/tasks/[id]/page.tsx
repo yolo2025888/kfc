@@ -14,7 +14,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ImageViewer } from '@/components/ImageViewer';
 import { Database } from '@/lib/types';
-import { getErrorMessage } from '@/lib/utils';
+import { displayUserAccount, getErrorMessage, getUserInitials } from '@/lib/utils';
 
 export const runtime = 'edge';
 
@@ -263,7 +263,7 @@ export default function AdminTaskDetailPage() {
                                     <Image src={participant.profiles.avatar_url} alt="avatar" width={56} height={56} className="object-cover" />
                                 ) : (
                                     <div className="h-full w-full flex items-center justify-center text-sm font-bold text-gray-500">
-                                        {(participant.profiles?.full_name?.[0] || 'U').toUpperCase()}
+                                        {getUserInitials(participant.profiles?.email, participant.profiles?.full_name)}
                                     </div>
                                 )}
                             </div>
@@ -272,7 +272,7 @@ export default function AdminTaskDetailPage() {
                                     <h3 className="text-lg font-bold text-gray-900">{participant.profiles?.full_name || '未知用户'}</h3>
                                     <Badge variant="outline">{participant.profiles?.role || 'user'}</Badge>
                                 </div>
-                                <div className="text-gray-500 text-sm">{participant.profiles?.email}</div>
+                                <div className="text-gray-500 text-sm">{displayUserAccount(participant.profiles?.email)}</div>
                                 <div className="text-xs text-gray-400 mt-1">认领时间: {new Date(participant.created_at).toLocaleString()}</div>
                             </div>
                             <Link href={`/app/admin/users/${participant.user_id}`}>

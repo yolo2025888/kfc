@@ -21,6 +21,7 @@ import {
 import type { LucideIcon } from 'lucide-react';
 import { useGlobal } from "@/lib/context/GlobalContext";
 import { createSPASassClient } from "@/lib/supabase/client";
+import { displayUserAccount, getUserInitials } from '@/lib/utils';
 
 type MenuItem = {
     code: string;
@@ -94,20 +95,6 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
         } catch (error) {
             console.error('Error logging out:', error);
         }
-    };
-
-    const getInitials = (email: string, name?: string | null) => {
-        if (name) {
-            const parts = name.trim().split(/\s+/);
-            if (parts.length > 1) {
-                return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
-            }
-            return name.slice(0, 2).toUpperCase();
-        }
-        const parts = email.split('@')[0].split(/[._-]/);
-        return parts.length > 1
-            ? (parts[0][0] + parts[1][0]).toUpperCase()
-            : parts[0].slice(0, 2).toUpperCase();
     };
 
     const productName = process.env.NEXT_PUBLIC_PRODUCTNAME;
@@ -198,10 +185,10 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
                         >
                             <div className="w-8 h-8 rounded-full bg-primary-100 flex items-center justify-center">
                                 <span className="text-primary-700 font-medium">
-                                    {(isLoadingMenu || !user) ? '...' : getInitials(user.email, profileName)}
+                                    {(isLoadingMenu || !user) ? '...' : getUserInitials(user.email, profileName)}
                                 </span>
                             </div>
-                            <span>{(isLoadingMenu || !user) ? '正在连接...' : (profileName || user.email?.split('@')[0])}</span>
+                            <span>{(isLoadingMenu || !user) ? '正在连接...' : (profileName || displayUserAccount(user.email))}</span>
                             <ChevronDown className="h-4 w-4"/>
                         </button>
 
@@ -210,7 +197,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
                                 <div className="p-2 border-b border-gray-100">
                                     <p className="text-xs text-gray-500">当前登录</p>
                                     <p className="text-sm font-medium text-gray-900 truncate">
-                                        {profileName || user?.email?.split('@')[0]}
+                                        {profileName || displayUserAccount(user?.email)}
                                     </p>
                                 </div>
                                 <div className="py-1">

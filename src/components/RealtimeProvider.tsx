@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useRef } from 'react';
-import { createSPASassClient } from '@/lib/supabase/client';
+import { createSPASassClient, hasSupabaseBrowserConfig } from '@/lib/supabase/client';
 import { useToast } from "@/hooks/use-toast";
 import { useRouter } from 'next/navigation';
 import { useGlobal } from "@/lib/context/GlobalContext";
@@ -30,6 +30,7 @@ export default function RealtimeProvider({ children }: { children: React.ReactNo
     useEffect(() => {
         // If user is not yet loaded or not logged in, don't setup
         if (!userId) return;
+        if (!hasSupabaseBrowserConfig()) return;
 
         const setupRealtime = async () => {
             const client = await createSPASassClient();

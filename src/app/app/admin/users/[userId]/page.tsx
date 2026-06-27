@@ -19,7 +19,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Loader2, ArrowLeft, Mail, Calendar, Briefcase, Save, Shield, Key, Settings, Trash2, UserCircle, MessageSquare, MapPin, Smartphone } from 'lucide-react';
 import { useToast } from "@/hooks/use-toast";
 import Image from 'next/image';
-import { getErrorMessage } from '@/lib/utils';
+import { displayUserAccount, getErrorMessage, getUserInitials } from '@/lib/utils';
 
 export const runtime = 'edge';
 
@@ -290,7 +290,7 @@ export default function AdminUserDetailPage() {
                         <DialogHeader>
                             <DialogTitle>编辑用户资料</DialogTitle>
                             <DialogDescription>
-                                对 {profile.full_name || profile.email} 进行信息修改、权限配置或密码重置。
+                                对 {profile.full_name || displayUserAccount(profile.email)} 进行信息修改、权限配置或密码重置。
                             </DialogDescription>
                         </DialogHeader>
 
@@ -474,13 +474,13 @@ export default function AdminUserDetailPage() {
                             {profile.avatar_url ? (
                                 <Image src={profile.avatar_url} alt="avatar" fill unoptimized sizes="80px" className="object-cover" />
                             ) : (
-                                profile.full_name ? profile.full_name.slice(0, 1).toUpperCase() : profile.email?.[0].toUpperCase()
+                                getUserInitials(profile.email, profile.full_name)
                             )}
                         </div>
                         <div className="space-y-1">
                             <CardTitle className="text-2xl">{profile.full_name || '未设置昵称'}</CardTitle>
                             <div className="flex items-center text-gray-500 gap-4 text-sm">
-                                <div className="flex items-center gap-1"><Mail className="h-4 w-4" /> {profile.email}</div>
+                                <div className="flex items-center gap-1"><Mail className="h-4 w-4" /> {displayUserAccount(profile.email)}</div>
                                 <div className="flex items-center gap-1"><Calendar className="h-4 w-4" /> 注册于 {new Date(profile.created_at).toLocaleDateString()}</div>
                             </div>
                             <div className="pt-2 flex gap-2">

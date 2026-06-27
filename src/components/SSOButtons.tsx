@@ -1,6 +1,6 @@
 'use client';
 
-import { createSPAClient } from '@/lib/supabase/client';
+import { createSPAClient, hasSupabaseBrowserConfig, missingSupabaseConfigMessage } from '@/lib/supabase/client';
 import Link from "next/link";
 
 type Provider = 'github' | 'google' | 'facebook' | 'apple';
@@ -69,6 +69,10 @@ function getEnabledProviders(): Provider[] {
 export default function SSOButtons({ onError }: SSOButtonsProps) {
     const handleSSOLogin = async (provider: Provider) => {
         try {
+            if (!hasSupabaseBrowserConfig()) {
+                throw new Error(missingSupabaseConfigMessage);
+            }
+
             const supabase = createSPAClient();
             const { error } = await supabase.auth.signInWithOAuth({
                 provider,
@@ -89,7 +93,7 @@ export default function SSOButtons({ onError }: SSOButtonsProps) {
 
     const enabledProviders = getEnabledProviders();
 
-    if (enabledProviders.length === 0) {
+    if (enabledProviders.length === 0 || !hasSupabaseBrowserConfig()) {
         return null;
     }
 

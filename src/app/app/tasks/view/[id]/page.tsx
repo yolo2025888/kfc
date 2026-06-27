@@ -12,7 +12,7 @@ import { Loader2, ArrowLeft, CheckCircle, ExternalLink, Link as LinkIcon } from 
 import { useToast } from "@/hooks/use-toast";
 import Image from 'next/image';
 import { ImageViewer } from '@/components/ImageViewer';
-import { getErrorMessage } from '@/lib/utils';
+import { displayUserAccount, getErrorMessage, getUserInitials } from '@/lib/utils';
 
 
 export const runtime = 'edge';
@@ -294,13 +294,13 @@ export default function TaskDetailPage() {
                                 <Link href={`/app/admin/users/${assignee.id}`}>
                                     <div className="flex items-center gap-4 p-4 bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors cursor-pointer border border-blue-100 group">
                                         <div className="h-12 w-12 rounded-full bg-blue-200 flex items-center justify-center text-blue-700 font-bold">
-                                            {assignee.full_name ? assignee.full_name.slice(0, 1).toUpperCase() : assignee.email?.[0].toUpperCase()}
+                                            {getUserInitials(assignee.email, assignee.full_name)}
                                         </div>
                                         <div>
                                             <div className="font-medium text-gray-900 group-hover:text-blue-700 transition-colors">
                                                 {assignee.full_name || '未设置昵称'}
                                             </div>
-                                            <div className="text-sm text-gray-500">{assignee.email}</div>
+                                            <div className="text-sm text-gray-500">{displayUserAccount(assignee.email)}</div>
                                         </div>
                                         <ExternalLink className="ml-auto h-4 w-4 text-blue-400 group-hover:text-blue-600" />
                                     </div>

@@ -4,7 +4,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { createSPASassClientAuthenticated } from '@/lib/supabase/client';
 import { SassClient } from '@/lib/supabase/unified';
 import { Database } from '@/lib/types';
-import { copyToClipboard, getErrorMessage } from '@/lib/utils';
+import { copyToClipboard, displayUserAccount, getErrorMessage, getUserInitials } from '@/lib/utils';
 import { User, Shield, Loader2, Key, Save, MapPin, MessageSquare, Smartphone, CheckCircle2, XCircle, UserCircle, Share2, Copy } from 'lucide-react';
 import { useToast } from "@/hooks/use-toast";
 import { Button } from '@/components/ui/button';
@@ -142,11 +142,11 @@ export default function UserSettingsPage() {
                     <CardContent className="space-y-6">
                         <div className="flex items-center gap-6 pb-6 border-b">
                             <div className="h-20 w-20 rounded-full bg-rose-100 flex items-center justify-center text-rose-600 text-3xl font-bold border-4 border-white shadow-sm">
-                                {fullName ? fullName.slice(0, 1).toUpperCase() : currentUser?.email?.[0].toUpperCase()}
+                                {getUserInitials(currentUser?.email, fullName)}
                             </div>
                             <div className="space-y-1">
                                 <div className="text-sm text-gray-500">登录账号</div>
-                                <div className="font-medium text-lg text-gray-900">{currentUser?.email}</div>
+                                <div className="font-medium text-lg text-gray-900">{displayUserAccount(currentUser?.email)}</div>
                                 <div className="flex gap-2 mt-2">
                                     <Badge 
                                         variant={

@@ -13,7 +13,7 @@ import { useToast } from "@/hooks/use-toast";
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Suspense } from 'react';
 import { Input } from '@/components/ui/input';
-import { cn, getErrorMessage } from "@/lib/utils";
+import { cn, displayUserAccount, getErrorMessage, getUserInitials } from "@/lib/utils";
 import {
   Select,
   SelectContent,
@@ -487,7 +487,7 @@ function ReviewsListContent() {
                                                 {lead.profiles?.avatar_url ? (
                                                     <Image src={lead.profiles.avatar_url} alt="avatar" fill unoptimized sizes="32px" className="object-cover" />
                                                 ) : (
-                                                    (lead.profiles?.full_name?.[0] || lead.profiles?.email?.[0] || 'U').toUpperCase()
+                                                    getUserInitials(lead.profiles?.email, lead.profiles?.full_name)
                                                 )}
                                             </div>
                                             <div className="flex flex-col">
@@ -495,7 +495,7 @@ function ReviewsListContent() {
                                                     {lead.profiles?.full_name || '未命名用户'}
                                                 </span>
                                                 <span className="text-[10px] text-gray-400">
-                                                    {lead.profiles?.email}
+                                                    {displayUserAccount(lead.profiles?.email)}
                                                 </span>
                                             </div>
                                         </div>

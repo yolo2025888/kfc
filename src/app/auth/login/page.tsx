@@ -5,6 +5,7 @@ import { createSPASassClient } from '@/lib/supabase/client';
 import {useEffect, useState} from 'react';
 import { useRouter } from 'next/navigation';
 import { Loader2 } from 'lucide-react';
+import { toInternalLoginEmail } from '@/lib/utils';
 
 export default function LoginPage() {
     const [email, setEmail] = useState('');
@@ -22,8 +23,7 @@ export default function LoginPage() {
         try {
             const client = await createSPASassClient();
             
-            // Auto-append @gmail.com if missing
-            const finalEmail = email.includes('@') ? email : `${email}@gmail.com`;
+            const finalEmail = toInternalLoginEmail(email);
             
             const { error: signInError } = await client.loginEmail(finalEmail, password);
 

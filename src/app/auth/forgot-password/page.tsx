@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { createSPASassClient } from '@/lib/supabase/client';
 import Link from 'next/link';
 import { CheckCircle } from 'lucide-react';
+import { toInternalLoginEmail } from '@/lib/utils';
 
 export default function ForgotPasswordPage() {
     const [email, setEmail] = useState('');
@@ -18,7 +19,7 @@ export default function ForgotPasswordPage() {
 
         try {
             const supabase = await createSPASassClient();
-            const { error } = await supabase.getSupabaseClient().auth.resetPasswordForEmail(email, {
+            const { error } = await supabase.getSupabaseClient().auth.resetPasswordForEmail(toInternalLoginEmail(email), {
                 redirectTo: `${window.location.origin}/auth/reset-password`,
             });
 
@@ -80,22 +81,23 @@ export default function ForgotPasswordPage() {
             <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
                     <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                        Email address
+                        账号
                     </label>
                     <div className="mt-1">
                         <input
                             id="email"
                             name="email"
-                            type="email"
-                            autoComplete="email"
+                            type="text"
+                            autoComplete="username"
                             required
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
+                            placeholder="请输入账号"
                             className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-primary-500 focus:outline-none focus:ring-primary-500"
                         />
                     </div>
                     <p className="mt-2 text-sm text-gray-500">
-                        Enter your email address and we will send you a link to reset your password.
+                        输入账号后，系统会发送密码重置链接。
                     </p>
                 </div>
 

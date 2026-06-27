@@ -16,7 +16,7 @@ import { Badge } from '@/components/ui/badge';
 import { Plus, Loader2, Trash2, Image as ImageIcon, SquarePen, User, RotateCcw } from 'lucide-react';
 import Image from 'next/image';
 import NProgress from 'nprogress';
-import { getErrorMessage } from '@/lib/utils';
+import { displayUserAccount, getErrorMessage } from '@/lib/utils';
 
 type Avatar = Database['public']['Tables']['avatar_library']['Row'] & { profiles?: { email: string, full_name: string } | null };
 
@@ -285,7 +285,7 @@ export default function AdminAvatarsPage() {
                                         {avatar.claimed_by ? (
                                             <div className="flex flex-col text-xs">
                                                 <span className="font-medium text-gray-900">{avatar.profiles?.full_name || '未知用户'}</span>
-                                                <span className="text-gray-500">{avatar.profiles?.email}</span>
+                                                <span className="text-gray-500">{displayUserAccount(avatar.profiles?.email)}</span>
                                             </div>
                                         ) : (
                                             <span className="text-gray-400 text-xs">-</span>

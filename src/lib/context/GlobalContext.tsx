@@ -2,7 +2,7 @@
 'use client';
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { createSPASassClient } from '@/lib/supabase/client';
+import { createSPASassClient, hasSupabaseBrowserConfig } from '@/lib/supabase/client';
 
 type User = {
     email: string;
@@ -25,6 +25,12 @@ export function GlobalProvider({ children }: { children: React.ReactNode }) {
         let authSubscription: { unsubscribe: () => void } | null = null;
 
         async function initAuth() {
+            if (!hasSupabaseBrowserConfig()) {
+                setUser(null);
+                setLoading(false);
+                return;
+            }
+
             try {
                 const sassClient = await createSPASassClient();
                 const supabase = sassClient.getSupabaseClient();
@@ -58,7 +64,9 @@ export function GlobalProvider({ children }: { children: React.ReactNode }) {
                 authSubscription = subscription;
 
             } catch (error) {
-                console.error('Auth initialization error:', error);
+                if (process.env.NODE_ENV !== 'development') {
+                    console.error('Auth initialization error:', error);
+                }
                 setUser(null);
             } finally {
                 setLoading(false);

@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from 'react';
-import { createSPASassClient } from '@/lib/supabase/client';
+import { createSPASassClient, hasSupabaseBrowserConfig } from '@/lib/supabase/client';
 import { ArrowRight, ChevronRight } from 'lucide-react';
 import Link from "next/link";
 
@@ -10,12 +10,20 @@ export default function AuthAwareButtons({ variant = 'primary' }) {
 
     useEffect(() => {
         const checkAuth = async () => {
+            if (!hasSupabaseBrowserConfig()) {
+                setIsAuthenticated(false);
+                setLoading(false);
+                return;
+            }
+
             try {
                 const supabase = await createSPASassClient();
                 const { data: { user } } = await supabase.getSupabaseClient().auth.getUser();
                 setIsAuthenticated(!!user);
             } catch (error) {
-                console.error('Error checking auth status:', error);
+                if (process.env.NODE_ENV !== 'development') {
+                    console.error('Error checking auth status:', error);
+                }
             } finally {
                 setLoading(false);
             }

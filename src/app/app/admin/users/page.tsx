@@ -20,6 +20,7 @@ import { Loader2, Eye, Mail, Shield, Search } from 'lucide-react';
 import { useToast } from "@/hooks/use-toast";
 import { useRouter } from 'next/navigation';
 import NProgress from 'nprogress';
+import { displayUserAccount, getUserInitials } from '@/lib/utils';
 
 type UserStat = {
     user_id: string;
@@ -80,7 +81,7 @@ export default function AdminUsersPage() {
     const filteredUsers = users.filter(user => {
         const matchesSearch = 
             (user.full_name?.toLowerCase() || '').includes(searchTerm.toLowerCase()) ||
-            (user.email?.toLowerCase() || '').includes(searchTerm.toLowerCase());
+            displayUserAccount(user.email).toLowerCase().includes(searchTerm.toLowerCase());
         
         const matchesRole = roleFilter === 'all' || user.role === roleFilter || (roleFilter === 'user' && !user.role);
 
@@ -165,12 +166,12 @@ export default function AdminUsersPage() {
                                     <TableCell>
                                         <div className="flex items-center gap-3">
                                             <div className="h-10 w-10 rounded-full bg-rose-100 flex items-center justify-center text-rose-600 font-bold">
-                                                {user.full_name ? user.full_name.slice(0, 1).toUpperCase() : user.email?.[0].toUpperCase()}
+                                                {getUserInitials(user.email, user.full_name)}
                                             </div>
                                             <div>
                                                 <div className="font-medium text-gray-900">{user.full_name || '未设置昵称'}</div>
                                                 <div className="text-xs text-gray-500 flex items-center gap-1">
-                                                    <Mail className="h-3 w-3" /> {user.email}
+                                                    <Mail className="h-3 w-3" /> {displayUserAccount(user.email)}
                                                 </div>
                                             </div>
                                         </div>
