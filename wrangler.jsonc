@@ -23,6 +23,8 @@
   "vars": {
     "NEXT_PUBLIC_PRODUCTNAME": "肯德基素人分发",
     "NEXT_PUBLIC_THEME": "theme-sass3",
-    "NEXT_PUBLIC_SSO_PROVIDERS": ""
+    "NEXT_PUBLIC_SSO_PROVIDERS": "",
+    "NEXT_PUBLIC_SUPABASE_URL": "https://uzjlssmjvdkjsqthekgh.supabase.co",
+    "NEXT_PUBLIC_SUPABASE_ANON_KEY": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV6amxzc21qdmRranNxdGhla2doIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI1OTUwNjAsImV4cCI6MjA5ODE3MTA2MH0.DS9vzCzdPh-QZZjxOsKS5v92qmvtpS16NXyR1h8_iKU"
   }
 }

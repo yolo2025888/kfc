@@ -3,20 +3,7 @@ import { createClient } from '@supabase/supabase-js'
 import {cookies} from 'next/headers'
 import {ClientType, SassClient} from "@/lib/supabase/unified";
 import {Database} from "@/lib/types";
-
-const missingSupabaseServerConfigMessage =
-    'Missing NEXT_PUBLIC_SUPABASE_URL or NEXT_PUBLIC_SUPABASE_ANON_KEY';
-
-function getSupabasePublicConfig() {
-    const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
-    const anon = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-
-    if (!url || !anon) {
-        throw new Error(missingSupabaseServerConfigMessage);
-    }
-
-    return { url, anon };
-}
+import { getSupabasePublicConfig } from "@/lib/supabase/env";
 
 export async function createSSRClient() {
     const cookieStore = await cookies()

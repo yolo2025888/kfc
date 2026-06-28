@@ -3,15 +3,17 @@ import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
 import { Database } from '@/lib/types';
 import { createServerAdminClient } from '@/lib/supabase/serverAdminClient';
+import { getSupabasePublicConfig } from '@/lib/supabase/env';
 import { getErrorMessage } from '@/lib/utils';
 
 export async function PUT(req: Request) {
     const cookieStore = await cookies();
+    const { url, anon } = getSupabasePublicConfig();
 
     // 1. Verify Auth User
     const supabase = createServerClient<Database>(
-        process.env.NEXT_PUBLIC_SUPABASE_URL!,
-        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+        url,
+        anon,
         {
             cookies: {
                 get(name: string) {
