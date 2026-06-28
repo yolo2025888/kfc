@@ -11,8 +11,6 @@ import {
 } from '@/lib/onboarding-guide';
 import { getErrorMessage } from '@/lib/utils';
 
-export const runtime = 'edge';
-
 type SupabaseLikeError = { message: string };
 type OnboardingGuideRow = {
   id: string;

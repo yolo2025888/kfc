@@ -4,8 +4,6 @@ import { createSSRClient } from '@/lib/supabase/server';
 import { Database } from '@/lib/types';
 import { getErrorMessage } from '@/lib/utils';
 
-export const runtime = 'edge';
-
 type PermissionRow = Database['public']['Tables']['app_permissions']['Row'];
 type RolePermissionRow = { permission: PermissionRow | null };
 

@@ -3,8 +3,6 @@ import { NextResponse } from 'next/server';
 import { isCurrentUserAdmin } from '@/lib/auth/admin';
 import { getErrorMessage } from '@/lib/utils';
 
-export const runtime = 'edge';
-
 export async function GET() {
   try {
     if (!(await isCurrentUserAdmin())) {

@@ -21,8 +21,6 @@ import { useToast } from "@/hooks/use-toast";
 import Image from 'next/image';
 import { displayUserAccount, getErrorMessage, getUserInitials } from '@/lib/utils';
 
-export const runtime = 'edge';
-
 const colorMap: Record<string, string> = {
     red: "bg-red-50 text-red-600",
     blue: "bg-blue-50 text-blue-600",

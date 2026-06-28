@@ -41,8 +41,6 @@ const colorMap: Record<string, string> = {
     gray: "bg-gray-100 text-gray-700"
 };
 
-export const runtime = 'edge';
-
 export default function TaskWorkspacePage() {
     const params = useParams();
     const router = useRouter();

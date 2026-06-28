@@ -19,8 +19,6 @@ type ClaimAvatarResult = {
     message?: string;
 };
 
-export const runtime = 'edge';
-
 export default function AvatarDetailPage() {
     const params = useParams();
     const router = useRouter();

@@ -33,8 +33,6 @@ import NProgress from 'nprogress';
 import Image from 'next/image';
 import { Database } from '@/lib/types';
 
-export const runtime = 'edge';
-
 const colorMap: Record<string, string> = {
     red: "bg-red-50 text-red-600",
     blue: "bg-blue-50 text-blue-600",

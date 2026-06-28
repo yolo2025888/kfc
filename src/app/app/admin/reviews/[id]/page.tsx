@@ -21,8 +21,6 @@ import { AssignLeadDialog } from '@/components/AssignLeadDialog';
 import { Database } from '@/lib/types';
 import { getErrorMessage } from '@/lib/utils';
 
-export const runtime = 'edge';
-
 const colorMap: Record<string, string> = {
     red: "bg-red-50 text-red-600",
     blue: "bg-blue-50 text-blue-600",

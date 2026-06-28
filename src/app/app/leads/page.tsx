@@ -15,8 +15,6 @@ import { Input } from '@/components/ui/input';
 import { Search } from 'lucide-react';
 import { getErrorMessage } from '@/lib/utils';
 
-export const runtime = 'edge';
-
 type Lead = Database['public']['Tables']['leads']['Row'];
 type Task = Database['public']['Tables']['tasks']['Row'];
 type UserTask = Database['public']['Tables']['user_tasks']['Row'] & { 

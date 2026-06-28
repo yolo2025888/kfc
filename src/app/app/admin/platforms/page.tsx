@@ -15,8 +15,6 @@ import { useToast } from "@/hooks/use-toast";
 import { Database } from '@/lib/types';
 import { getErrorMessage } from '@/lib/utils';
 
-export const runtime = 'edge';
-
 type Platform = Database['public']['Tables']['platforms']['Row'];
 
 const colorMap: Record<string, string> = {

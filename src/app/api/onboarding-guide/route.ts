@@ -8,8 +8,6 @@ import {
 } from '@/lib/onboarding-guide';
 import { createSSRClient } from '@/lib/supabase/server';
 
-export const runtime = 'edge';
-
 type SupabaseLikeError = { message: string };
 type OnboardingGuideRow = {
   id: string;

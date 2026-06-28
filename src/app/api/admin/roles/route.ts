@@ -3,8 +3,6 @@ import { NextResponse } from 'next/server';
 import { isCurrentUserAdmin } from '@/lib/auth/admin';
 import { Database } from '@/lib/types';
 
-export const runtime = 'edge';
-
 function unauthorized() {
   return NextResponse.json(
     { error: 'Unauthorized: Only administrators can perform this action.' },

@@ -14,8 +14,6 @@ import { Input } from '@/components/ui/input';
 import { useRouter } from 'next/navigation';
 import { getErrorMessage } from '@/lib/utils';
 
-export const runtime = 'edge';
-
 function LiveTimer({ startTime, endTime }: { startTime: string | null, endTime?: string | null }) {
     const [elapsed, setElapsed] = useState<string>('');
 

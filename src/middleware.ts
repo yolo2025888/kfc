@@ -6,6 +6,12 @@ export async function middleware(request: NextRequest) {
     const hostname = request.headers.get('host') || '';
     const { pathname } = request.nextUrl;
 
+    if (hostname === 'www.kfcv.com') {
+        const url = request.nextUrl.clone();
+        url.hostname = 'kfcv.com';
+        return NextResponse.redirect(url, 301);
+    }
+
     // If domain is qlei.com (or subdomains) and user visits root '/', redirect to login
     if (hostname.includes('qlei.com') && pathname === '/') {
         return NextResponse.redirect(new URL('/auth/login', request.url));

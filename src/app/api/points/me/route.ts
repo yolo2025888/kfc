@@ -8,8 +8,6 @@ import {
 } from '@/lib/points';
 import { getErrorMessage } from '@/lib/utils';
 
-export const runtime = 'edge';
-
 type SupabaseLikeError = { message: string };
 type PointsAccountRow = {
   user_id: string;

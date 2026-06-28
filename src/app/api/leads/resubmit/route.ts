@@ -5,8 +5,6 @@ import { Database } from '@/lib/types';
 import { createServerAdminClient } from '@/lib/supabase/serverAdminClient';
 import { getErrorMessage } from '@/lib/utils';
 
-export const runtime = 'edge';
-
 export async function PUT(req: Request) {
     const cookieStore = await cookies();
 

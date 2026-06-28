@@ -18,8 +18,6 @@ import Image from 'next/image';
 import { ImageViewer } from '@/components/ImageViewer';
 import { getErrorMessage } from '@/lib/utils';
 
-export const runtime = 'edge';
-
 type Lead = Database['public']['Tables']['leads']['Row'] & {
     user_tasks: { 
         tasks: { 

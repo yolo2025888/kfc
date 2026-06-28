@@ -16,8 +16,6 @@ import { ImageViewer } from '@/components/ImageViewer';
 import { Database } from '@/lib/types';
 import { displayUserAccount, getErrorMessage, getUserInitials } from '@/lib/utils';
 
-export const runtime = 'edge';
-
 type Task = Database['public']['Tables']['tasks']['Row'];
 type Lead = Database['public']['Tables']['leads']['Row'];
 type Platform = Database['public']['Tables']['platforms']['Row'];

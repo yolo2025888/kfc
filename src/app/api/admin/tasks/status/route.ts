@@ -3,8 +3,6 @@ import { NextResponse } from 'next/server';
 import { isCurrentUserAdmin } from '@/lib/auth/admin';
 import { getErrorMessage } from '@/lib/utils';
 
-export const runtime = 'edge';
-
 export async function PUT(req: Request) {
     if (!(await isCurrentUserAdmin())) {
         return NextResponse.json({ error: 'Unauthorized: Only administrators can perform this action.' }, { status: 403 });

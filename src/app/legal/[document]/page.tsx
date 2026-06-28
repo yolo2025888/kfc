@@ -4,8 +4,6 @@ import React from 'react';
 import LegalDocument from '@/components/LegalDocument';
 import { notFound } from 'next/navigation';
 
-export const runtime = 'edge';
-
 const legalDocuments = {
     'privacy': {
         title: 'Privacy Notice',

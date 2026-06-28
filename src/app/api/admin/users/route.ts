@@ -4,8 +4,6 @@ import { Database } from '@/lib/types';
 import { isCurrentUserAdmin } from '@/lib/auth/admin';
 import { getErrorMessage } from '@/lib/utils';
 
-export const runtime = 'edge';
-
 export async function POST(req: Request) {
     const { email, password, role, custom_role_id, full_name, remark, visible_platforms, visible_categories } = await req.json();
 

@@ -1,8 +1,6 @@
 import { NextResponse } from 'next/server';
 import { createServerAdminClient } from '@/lib/supabase/serverAdminClient';
 
-export const runtime = 'edge';
-
 const ALLOWED_PLATFORMS = new Set([
   'douyin',
   'xiaohongshu',

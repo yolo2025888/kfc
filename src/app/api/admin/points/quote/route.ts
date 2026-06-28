@@ -4,8 +4,6 @@ import { createServerAdminClient } from '@/lib/supabase/serverAdminClient';
 import { isPointsTriggerEvent, normalizePoints } from '@/lib/points';
 import { getErrorMessage } from '@/lib/utils';
 
-export const runtime = 'edge';
-
 type SupabaseLikeError = { message: string };
 type ResolveRuleRow = {
   id: string;

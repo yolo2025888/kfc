@@ -10,8 +10,6 @@ import {
 } from '@/lib/points';
 import { getErrorMessage } from '@/lib/utils';
 
-export const runtime = 'edge';
-
 type SupabaseLikeError = { message: string };
 type PlatformRow = { id: string; name: string; color: string | null };
 type CategoryRow = { id: string; name: string; parent_id: string | null };
