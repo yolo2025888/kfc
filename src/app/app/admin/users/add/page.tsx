@@ -151,7 +151,7 @@ export default function AdminAddUserPage() {
                     <CardDescription>创建新的平台登录账号，并为其分配角色。</CardDescription>
                 </CardHeader>
                 <CardContent>
-                    <form onSubmit={handleSubmit} className="space-y-6">
+                    <form method="post" onSubmit={handleSubmit} className="space-y-6">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div className="space-y-2">
                                 <Label htmlFor="email">用户名</Label>
